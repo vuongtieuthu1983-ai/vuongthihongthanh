@@ -1,0 +1,654 @@
+HTML
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đấu Trường Tri Thức AI - Giáo viên: Vương Thị Hồng Thanh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+  <!-- Header -->
+  <header class="bg-indigo-600 text-white shadow-md py-3 px-6 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <i class="fa-solid fa-graduation-cap text-3xl text-amber-300"></i>
+      <div>
+        <h1 class="text-xl font-black uppercase tracking-wider">Đấu Trường Tri Thức AI</h1>
+        <p class="text-xs text-indigo-200">
+          <i class="fa-solid fa-chalkboard-user mr-1"></i> Giáo viên thiết kế: <span class="font-bold text-amber-300">Vương Thị Hồng Thanh</span> | Từng bài độc lập SGK & VBT 3, 4, 5
+        </p>
+      </div>
+    </div>
+    <button onclick="toggleConfig()" class="bg-indigo-700 hover:bg-indigo-800 text-xs font-bold py-2 px-3 rounded-lg border border-indigo-400">
+      <i class="fa-solid fa-sliders mr-1"></i> Cài đặt bài học
+    </button>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 md:p-6">
+
+    <!-- BẢNG ĐIỀU KHIỂN GIÁO VIÊN -->
+    <section id="config-section" class="bg-white rounded-2xl shadow-lg border border-slate-200 p-5 mb-6">
+      <div class="flex justify-between items-center mb-4 border-b pb-2">
+        <h2 class="text-lg font-bold text-indigo-700 flex items-center">
+          <i class="fa-solid fa-wand-magic-sparkles mr-2 text-amber-500"></i> Thiết lập đề thi (Chuẩn SGK & VBT Kết nối tri thức)
+        </h2>
+        <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-1 rounded">GV: Vương Thị Hồng Thanh</span>
+      </div>
+
+      <!-- Tab chuyển đổi -->
+      <div class="flex space-x-3 mb-4">
+        <button id="tab-btn-ai" onclick="switchTab('ai')" class="text-xs font-bold py-1.5 px-4 rounded-lg bg-indigo-600 text-white shadow">
+          <i class="fa-solid fa-book-open mr-1"></i> 1. Chọn bài học theo SGK
+        </button>
+        <button id="tab-btn-custom" onclick="switchTab('custom')" class="text-xs font-bold py-1.5 px-4 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">
+          <i class="fa-solid fa-file-pen mr-1"></i> 2. Tự dán câu hỏi từ giáo án
+        </button>
+      </div>
+
+      <!-- Khung 1: Chọn bài theo SGK -->
+      <div id="panel-ai" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Số lượng câu thi đấu:</label>
+            <select id="quiz-count" class="w-full text-sm p-2 border rounded-lg outline-none font-bold text-indigo-700 bg-white">
+              <option value="5">5 câu</option>
+              <option value="8">8 câu</option>
+              <option value="10" selected>10 câu</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Hoặc gõ từ khóa tìm nhanh:</label>
+            <input type="text" id="quiz-topic-custom" placeholder="VD: Thông tin, bàn phím, tệp thư mục..." class="w-full text-sm p-2 border rounded-lg outline-none">
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Chọn Từng Bài Học Riêng Biệt Trong Sách:</label>
+            <select id="select-lesson" class="w-full text-sm p-2.5 border rounded-lg outline-none font-bold text-slate-700 bg-white">
+              <optgroup label="=== TIN HỌC LỚP 3 ===">
+                <option value="lop3_bai1" selected>Lớp 3 - Bài 1: Thông tin và quyết định</option>
+                <option value="lop3_bai2">Lớp 3 - Bài 2: Xử lí thông tin</option>
+                <option value="lop3_bai3">Lớp 3 - Bài 3: Máy tính và em</option>
+                <option value="lop3_bai4">Lớp 3 - Bài 4: Làm việc với máy tính & An toàn điện</option>
+                <option value="lop3_bai5">Lớp 3 - Bài 5: Sử dụng bàn phím</option>
+                <option value="lop3_bai6">Lớp 3 - Bài 6: Khám phá thông tin trên Internet</option>
+                <option value="lop3_bai7">Lớp 3 - Bài 7: Sắp xếp để dễ tìm</option>
+                <option value="lop3_bai8">Lớp 3 - Bài 8: Sơ đồ hình cây - Tổ chức thông tin</option>
+                <option value="lop3_bai9">Lớp 3 - Bài 9: Thực hành với tệp và thư mục</option>
+                <option value="lop3_bai10">Lớp 3 - Bài 10: Bảo vệ thông tin khi dùng máy tính</option>
+                <option value="lop3_bai11">Lớp 3 - Bài 11: Bài trình chiếu của em</option>
+                <option value="lop3_bai12">Lớp 3 - Bài 12: Tìm hiểu về thế giới tự nhiên</option>
+                <option value="lop3_bai13">Lớp 3 - Bài 13: Luyện tập sử dụng chuột</option>
+                <option value="lop3_bai14">Lớp 3 - Bài 14: Em thực hiện công việc như thế nào?</option>
+                <option value="lop3_bai15">Lớp 3 - Bài 15: Công việc được thực hiện theo điều kiện</option>
+                <option value="lop3_bai16">Lớp 3 - Bài 16: Công việc của em và sự trợ giúp của máy tính</option>
+              </optgroup>
+              <optgroup label="=== TIN HỌC LỚP 4 ===">
+                <option value="lop4_bai1">Lớp 4 - Bài 1: Phần cứng và phần mềm máy tính</option>
+                <option value="lop4_bai2">Lớp 4 - Bài 2: Gõ bàn phím đúng cách</option>
+                <option value="lop4_bai3">Lớp 4 - Bài 3: Thông tin trên trang web</option>
+                <option value="lop4_bai4">Lớp 4 - Bài 4: Tìm kiếm thông tin trên Internet</option>
+                <option value="lop4_bai5">Lớp 4 - Bài 5: Thao tác với tệp và thư mục</option>
+                <option value="lop4_bai6">Lớp 4 - Bài 6: Sử dụng phần mềm khi được phép</option>
+                <option value="lop4_bai7">Lớp 4 - Bài 7: Tạo bài trình chiếu</option>
+                <option value="lop4_bai8">Lớp 4 - Bài 8: Định dạng văn bản trên trang chiếu</option>
+                <option value="lop4_bai9">Lớp 4 - Bài 9: Hiệu ứng chuyển trang</option>
+                <option value="lop4_bai10">Lớp 4 - Bài 10: Phần mềm soạn thảo văn bản Word</option>
+                <option value="lop4_bai11">Lớp 4 - Bài 11: Chỉnh sửa văn bản</option>
+                <option value="lop4_bai12">Lớp 4 - Bài 12: Thực hành đa phương tiện</option>
+                <option value="lop4_bai13">Lớp 4 - Bài 13: Chơi với máy tính</option>
+                <option value="lop4_bai14">Lớp 4 - Bài 14: Khám phá môi trường lập trình trực quan Scratch</option>
+                <option value="lop4_bai15">Lớp 4 - Bài 15: Tạo chương trình máy tính để diễn tả ý tưởng</option>
+                <option value="lop4_bai16">Lớp 4 - Bài 16: Chương trình của em</option>
+              </optgroup>
+              <optgroup label="=== TIN HỌC LỚP 5 ===">
+                <option value="lop5_bai1">Lớp 5 - Bài 1: Em có thể làm gì với máy tính?</option>
+                <option value="lop5_bai2">Lớp 5 - Bài 2: Tìm kiếm thông tin trên website</option>
+                <option value="lop5_bai3">Lớp 5 - Bài 3: Tìm kiếm thông tin trong giải quyết vấn đề</option>
+                <option value="lop5_bai4">Lớp 5 - Bài 4: Cây thư mục</option>
+                <option value="lop5_bai5">Lớp 5 - Bài 5: Bản quyền nội dung thông tin</option>
+                <option value="lop5_bai6">Lớp 5 - Bài 6: Định dạng kí tự và bố trí hình ảnh trong văn bản</option>
+                <option value="lop5_bai7">Lớp 5 - Bài 7: Thực hành soạn thảo văn bản</option>
+                <option value="lop5_bai8">Lớp 5 - Bài 8: Làm quen với phần mềm đồ họa</option>
+                <option value="lop5_bai9">Lớp 5 - Bài 9: Sử dụng phần mềm đồ họa tạo sản phẩm số</option>
+                <option value="lop5_bai10">Lớp 5 - Bài 10: Cấu trúc tuần tự</option>
+                <option value="lop5_bai11">Lớp 5 - Bài 11: Cấu trúc lặp</option>
+                <option value="lop5_bai12">Lớp 5 - Bài 12: Thực hành sử dụng lệnh lặp</option>
+                <option value="lop5_bai13">Lớp 5 - Bài 13: Cấu trúc rẽ nhánh</option>
+                <option value="lop5_bai14">Lớp 5 - Bài 14: Sử dụng biến trong chương trình</option>
+                <option value="lop5_bai15">Lớp 5 - Bài 15: Sử dụng biểu thức trong chương trình</option>
+                <option value="lop5_bai16">Lớp 5 - Bài 16: Từ kịch bản đến chương trình</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="flex items-center justify-between flex-wrap gap-2 pt-1">
+            <span class="text-xs" id="ai-status-msg"></span>
+            <button id="btn-submit-ai" onclick="napDeTheoBaiHoc()" class="bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white font-bold text-sm py-2 px-5 rounded-lg shadow transition flex items-center">
+              <i class="fa-solid fa-bolt mr-2"></i> Bấm để nạp câu hỏi & Đảo ngẫu nhiên đáp án
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Khung 2: Tự dán câu hỏi có sẵn -->
+      <div id="panel-custom" class="hidden space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 mb-1">Dán câu hỏi từ Word (Hệ thống tự động đảo A/B/C/D ngẫu nhiên):</label>
+          <textarea id="custom-quiz-text" rows="8" class="w-full text-xs font-mono p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none" placeholder="Câu 1: Câu hỏi thứ nhất là gì?
+A. Lựa chọn 1
+B. Lựa chọn 2
+C. Lựa chọn 3
+D. Lựa chọn 4
+Đáp án: A
+Giải thích: Lời giải thích..."></textarea>
+        </div>
+        <div class="flex justify-end">
+          <button onclick="napDeThuCong()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-2 px-5 rounded-lg shadow flex items-center">
+            <i class="fa-solid fa-check mr-2"></i> Cập nhật bộ câu hỏi vào trò chơi
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHU VỰC THI ĐẤU -->
+    <div class="grid grid-cols-1 gap-6">
+
+      <!-- Bảng điểm & Thanh Kéo Co -->
+      <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-4">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-xl bg-red-500 text-white flex items-center justify-center font-black text-2xl shadow-md">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-red-600 text-lg">ĐỘI ĐỎ</h3>
+              <p class="text-xs text-slate-500 font-semibold">Điểm: <span id="score-red" class="text-red-600 font-black text-xl">0</span></p>
+            </div>
+          </div>
+
+          <div class="text-center px-4 py-1.5 bg-slate-100 rounded-full border border-slate-300">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Lượt thi:</span>
+            <span id="current-turn-badge" class="ml-1 text-xs font-black text-red-600 bg-red-100 px-2.5 py-0.5 rounded-full">ĐỘI ĐỎ</span>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="text-right">
+              <h3 class="font-bold text-blue-600 text-lg">ĐỘI XANH</h3>
+              <p class="text-xs text-slate-500 font-semibold">Điểm: <span id="score-blue" class="text-blue-600 font-black text-xl">0</span></p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center font-black text-2xl shadow-md">
+              <i class="fa-solid fa-droplet"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative w-full h-8 bg-slate-200 rounded-full overflow-hidden flex items-center border border-slate-300">
+          <div id="tug-bar-red" class="h-full bg-red-500 transition-all duration-300" style="width: 50%;"></div>
+          <div id="tug-bar-blue" class="h-full bg-blue-500 transition-all duration-300" style="width: 50%;"></div>
+          <div class="absolute inset-x-0 mx-auto w-1 h-full bg-white opacity-80"></div>
+          <div id="tug-knot" class="absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-amber-400 rounded-full border-2 border-white shadow flex items-center justify-center text-xs font-black transition-all duration-300">
+            VS
+          </div>
+        </div>
+      </div>
+
+      <!-- Khung Hiển Thị Câu Hỏi -->
+      <div id="quiz-container" class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-8">
+        <div class="flex justify-between items-center mb-4">
+          <span id="question-progress" class="text-xs font-bold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200">
+            Câu hỏi 1 / 10
+          </span>
+          <span class="text-xs font-semibold text-slate-400">
+            <i class="fa-regular fa-clock mr-1"></i> Bấm chọn đáp án chính xác
+          </span>
+        </div>
+
+        <h2 id="question-text" class="text-xl md:text-2xl font-bold text-slate-800 mb-6 leading-relaxed">
+          Đang chuẩn bị câu hỏi...
+        </h2>
+
+        <div id="answers-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+        <!-- Khung phản hồi AI -->
+        <div id="ai-feedback-box" class="mt-6 p-4 rounded-xl border border-dashed hidden transition-all">
+          <div class="flex items-start space-x-3">
+            <div id="ai-feedback-icon" class="text-2xl mt-0.5"></div>
+            <div class="flex-1">
+              <h4 id="ai-feedback-title" class="font-bold text-sm"></h4>
+              <p id="ai-feedback-content" class="text-sm mt-1 text-slate-700 leading-normal"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút chuyển câu cố định -->
+        <div class="mt-6 pt-4 border-t flex justify-end">
+          <button id="btn-next-fixed" onclick="cauTiepTheo()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition flex items-center">
+            <span>Câu tiếp theo</span>
+            <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Khung Kết Thúc -->
+      <div id="game-over-box" class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center hidden">
+        <div class="w-20 h-20 mx-auto rounded-full bg-amber-100 text-amber-500 flex items-center justify-center text-4xl mb-4">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <h2 class="text-2xl font-black mb-2" id="winner-text">ĐỘI ĐỎ CHIẾN THẮNG!</h2>
+        <p class="text-sm text-slate-600 mb-6" id="final-summary-text">Cả hai đội đã hoàn thành phần thi xuất sắc.</p>
+        <button onclick="choiLai()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition">
+          <i class="fa-solid fa-rotate-right mr-2"></i> Chơi lại trận mới
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function xaoTronDapAn(c) {
+      var dapAnDungText = c.options[c.correct];
+      var newOptions = c.options.slice();
+
+      for (var i = newOptions.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = newOptions[i];
+        newOptions[i] = newOptions[j];
+        newOptions[j] = temp;
+      }
+
+      var newCorrectIdx = newOptions.indexOf(dapAnDungText);
+
+      return {
+        question: c.question,
+        options: newOptions,
+        correct: newCorrectIdx,
+        aiExplanation: c.aiExplanation
+      };
+    }
+
+    // KHO DỮ LIỆU ĐỘC LẬP TỪNG BÀI - ĐÃ HOÀN THIỆN ĐẦY ĐỦ TỪ 8 ĐẾN 12 CÂU RIÊNG BIỆT CHO MỌI BÀI HỌC
+    var DATABASE = {
+      // --- TIN HỌC LỚP 3 ---
+      "lop3_bai1": [
+        { question: "Những hiểu biết của em về thế giới xung quanh được gọi là gì?", options: ["Thông tin", "Quyết định", "Hành động", "Suy nghĩ"], correct: 0, aiExplanation: "SGK Tin học 3: Những điều em biết là thông tin." },
+        { question: "Buổi sáng nghe tiếng chuông đồng hồ báo thức reo, Minh quyết định thức dậy. Đâu là thông tin trong tình huống?", options: ["Tiếng chuông đồng hồ báo thức reo", "Minh thức dậy", "Trời đã sáng", "Chiếc đồng hồ"], correct: 0, aiExplanation: "Tiếng chuông báo thức là thông tin." },
+        { question: "Mẹ chuẩn bị đi làm, thấy trời mưa Khoa đưa áo mưa cho mẹ. Đâu là thông tin trong tình huống trên?", options: ["Trời mưa", "Khoa đưa áo mưa", "Mẹ đi làm", "Chiếc áo mưa"], correct: 0, aiExplanation: "Trời mưa là thông tin thời tiết." },
+        { question: "Vai trò quan trọng nhất của thông tin đối với con người là gì?", options: ["Giúp con người hiểu biết và đưa ra các quyết định hành động đúng đắn, phù hợp", "Chỉ để cho vui", "Làm cho bộ não mệt mỏi", "Không có vai trò gì"], correct: 0, aiExplanation: "Chúng ta cần phải có thông tin để suy nghĩ và đưa ra quyết định." },
+        { question: "Hôm nay có tiết Thể dục nên Minh đi giày thể thao. Thông tin giúp Minh ra quyết định là gì?", options: ["Thời khóa biểu hôm nay có tiết Thể dục", "Đôi giày thể thao", "Bạn Minh đi học", "Sân trường rộng"], correct: 0, aiExplanation: "Thời khóa biểu có tiết Thể dục là thông tin." },
+        { question: "Ở hành lang lớp học có tấm biển ghi: 'Muốn biết thì hỏi, muốn giỏi thì học'. Thông tin đó thuộc dạng thông tin nào?", options: ["Dạng chữ", "Dạng hình ảnh", "Dạng âm thanh", "Dạng xúc giác"], correct: 0, aiExplanation: "Câu khẩu hiệu được viết bằng các chữ cái trên tấm biển nên thuộc dạng chữ." },
+        { question: "Khi nhìn thấy đèn tín hiệu giao thông chuyển sang màu đỏ, người tham gia giao thông sẽ quyết định điều gì?", options: ["Dừng lại trước vạch dừng", "Đi thật nhanh qua ngã tư", "Rẽ trái ngay", "Tắt máy xe"], correct: 0, aiExplanation: "Đèn đỏ quy định người điều khiển phương tiện phải dừng lại." },
+        { question: "Điều gì xảy ra khi thông tin thay đổi?", options: ["Quyết định của con người có thể thay đổi theo cho phù hợp với hoàn cảnh mới", "Quyết định giữ nguyên không đổi", "Con người dừng suy nghĩ", "Không có ảnh hưởng gì"], correct: 0, aiExplanation: "Thông tin thay đổi sẽ dẫn đến việc điều chỉnh quyết định." },
+        { question: "Bạn An quan sát thấy có 3 thùng rác với nhãn: 'RÁC HỮU CƠ', 'GIẤY LOẠI', 'RÁC KHÁC'. Điều gì giúp An bỏ rác đúng thùng?", options: ["Chữ viết và hình vẽ chỉ dẫn ghi trên mỗi thùng rác", "Trọng lượng của thùng rác", "Màu sắc ngẫu nhiên", "Âm thanh phát ra"], correct: 0, aiExplanation: "Nhãn chữ và hình vẽ cung cấp thông tin phân loại rác chính xác." },
+        { question: "Quan sát tấm biển cắm ở bờ ao có chữ 'AO SÂU NGUY HIỂM', em sẽ có quyết định gì?", options: ["Không đến gần hoặc chơi đùa ở bờ ao để tránh đuối nước", "Nhảy xuống ao bơi", "Rủ bạn ra bờ ao câu cá", "Không quan tâm"], correct: 0, aiExplanation: "Thông tin cảnh báo nguy hiểm giúp em bảo đảm an toàn tính mạng." }
+      ],
+      "lop3_bai2": [
+        { question: "Ba dạng thông tin thường gặp nhất trong cuộc sống hằng ngày là gì?", options: ["Dạng chữ, dạng hình ảnh và dạng âm thanh", "Chỉ có dạng số", "Chỉ có dạng video", "Dạng chữ và mùi vị"], correct: 0, aiExplanation: "SGK Tin học 3 chỉ rõ 3 dạng thông tin thường gặp là dạng chữ, dạng hình ảnh và dạng âm thanh." },
+        { question: "Bộ phận nào của cơ thể con người đóng vai trò là nơi tiếp nhận, xử lí thông tin và ra quyết định?", options: ["Bộ não", "Đôi mắt", "Đôi tai", "Đôi bàn tay"], correct: 0, aiExplanation: "Bộ não là trung tâm xử lí thông tin, điều khiển mọi suy nghĩ và hành động của con người." },
+        { question: "Khi em xem một video ca nhạc thiếu nhi, em đã tiếp nhận thông tin thuộc những dạng nào?", options: ["Dạng âm thanh và dạng hình ảnh", "Chỉ có dạng chữ", "Chỉ có dạng mùi vị", "Dạng hình ảnh và mùi vị"], correct: 0, aiExplanation: "Video ca nhạc kết hợp cả hình ảnh chuyển động và âm thanh tiếng nhạc, giọng hát." },
+        { question: "Bức tranh vẽ cảnh thiên nhiên treo ở hành lang lớp học thuộc dạng thông tin nào?", options: ["Dạng hình ảnh", "Dạng âm thanh", "Dạng chữ", "Dạng mùi vị"], correct: 0, aiExplanation: "Tranh vẽ, ảnh chụp được mắt quan sát và tiếp nhận nên thuộc dạng thông tin hình ảnh." },
+        { question: "Tiếng còi xe cứu hỏa đang chạy trên đường thuộc dạng thông tin nào?", options: ["Dạng âm thanh", "Dạng hình ảnh", "Dạng chữ", "Dạng số"], correct: 0, aiExplanation: "Tiếng còi hú được tai tiếp nhận qua thính giác nên thuộc dạng âm thanh." },
+        { question: "Dòng chữ 'NỘI QUY PHÒNG TIN HỌC' trên bảng thuộc dạng thông tin nào?", options: ["Dạng chữ", "Dạng âm thanh", "Dạng hình ảnh", "Dạng cử chỉ"], correct: 0, aiExplanation: "Dòng chữ viết mang nội dung thông điệp dạng chữ." },
+        { question: "Khi bấm phím số 3 trên điều khiển ti vi, ti vi nhận thông tin và đưa ra hành động gì?", options: ["Bộ phận xử lí trong ti vi quyết định chuyển màn hình đến kênh số 3 (ví dụ VTV3)", "Ti vi tự động tắt nguồn", "Ti vi mở cửa sổ mới", "Tăng giảm âm lượng"], correct: 0, aiExplanation: "Ti vi tiếp nhận thông tin số 3 từ điều khiển, bộ phận xử lí xử lí và chuyển kênh tương ứng." },
+        { question: "Khi em nhấn vào nút dấu cộng (+) trên mặt bếp từ, bếp từ tiếp nhận thông tin gì và hành động ra sao?", options: ["Tiếp nhận thông tin tăng nhiệt độ và quyết định tăng mức nhiệt độ lên cao hơn", "Tiếp nhận thông tin và tự động tắt bếp", "Bếp từ phát ra bài hát", "Không phản ứng"], correct: 0, aiExplanation: "Nút (+) truyền tín hiệu tăng nhiệt độ, bếp từ xử lí và tăng công suất nấu." },
+        { question: "Minh dùng điện thoại thông minh chụp ảnh cánh đồng lúa. Thông tin điện thoại thu nhận thuộc dạng gì và kết quả là gì?", options: ["Thu nhận thông tin dạng hình ảnh qua ống kính và kết quả là một bức ảnh số lưu trong máy", "Thu nhận âm thanh", "Thu nhận văn bản", "Tín hiệu điện thoại"], correct: 0, aiExplanation: "Ống kính máy ảnh thu nhận hình ảnh cảnh vật, sau khi xử lí tạo ra tệp ảnh chụp." },
+        { question: "Điểm giống nhau giữa bộ não con người và các thiết bị điều khiển thông minh là gì?", options: ["Đều có khả năng tiếp nhận thông tin, xử lí thông tin để đưa ra quyết định hành động", "Đều được làm bằng kim loại", "Đều chạy bằng điện", "Đều chạy nhảy"], correct: 0, aiExplanation: "Cả con người và máy móc thông minh đều có quá trình: Thu nhận -> Xử lí -> Quyết định hành động." }
+      ],
+      "lop3_bai3": [
+        { question: "Máy tính để bàn thông dụng gồm có 4 bộ phận cơ bản nào?", options: ["Thân máy, màn hình, bàn phím và chuột", "Màn hình, bàn phím, loa và máy in", "Thân máy, chuột, loa và micro", "Bàn phím, chuột, camera"], correct: 0, aiExplanation: "4 bộ phận cơ bản bắt buộc của máy tính để bàn là thân máy, màn hình, bàn phím và chuột." },
+        { question: "Bộ phận nào của máy tính để bàn chứa bộ vi xử lí và được ví như 'bộ não' điều khiển mọi hoạt động?", options: ["Thân máy", "Màn hình", "Chuột", "Bàn phím"], correct: 0, aiExplanation: "Thân máy chứa CPU, là bộ phận quan trọng nhất điều khiển mọi hoạt động." },
+        { question: "Màn hình máy tính có chức năng chính là gì?", options: ["Hiển thị kết quả làm việc của máy tính", "Nhập ký tự vào văn bản", "Phát ra âm thanh", "In ra giấy"], correct: 0, aiExplanation: "Màn hình hiển thị hình ảnh, chữ viết và kết quả làm việc." },
+        { question: "Bàn phím máy tính được dùng để làm gì?", options: ["Nhập thông tin chữ, số và gửi tín hiệu điều khiển vào máy tính", "Hiển thị hình ảnh", "Phát ra âm thanh", "Lưu trữ dữ liệu"], correct: 0, aiExplanation: "Bàn phím gồm nhiều phím ký tự giúp người dùng nhập văn bản." },
+        { question: "Chuột máy tính giúp em thực hiện việc gì?", options: ["Điều khiển máy tính thuận tiện và nhanh chóng hơn thông qua con trỏ trên màn hình", "Gõ văn bản dài", "In tài liệu", "Lưu giữ tệp tin"], correct: 0, aiExplanation: "Chuột máy tính là thiết bị điều khiển trực quan giúp tương tác dễ dàng." },
+        { question: "Thiết bị nào sau đây dùng để phát ra âm thanh từ máy tính?", options: ["Loa (Speaker) hoặc tai nghe", "Màn hình", "Bàn phím", "Thân máy"], correct: 0, aiExplanation: "Loa và tai nghe đưa thông tin dạng âm thanh ra ngoài cho người nghe." },
+        { question: "Máy tính xách tay (Laptop) có điểm gì khác biệt so với máy tính để bàn?", options: ["Màn hình, bàn phím, chuột cảm ứng gắn liền với thân máy, gọn nhẹ dễ di chuyển", "Không có màn hình", "Không có bộ xử lí", "Không cần điện"], correct: 0, aiExplanation: "Laptop tích hợp tất cả các bộ phận vào một khối nhỏ gọn." },
+        { question: "Trên điện thoại thông minh hoặc máy tính bảng, bộ phận nào tiếp nhận thông tin vào?", options: ["Màn hình cảm ứng", "Nút nguồn", "Loa ngoài", "Camera"], correct: 0, aiExplanation: "Màn hình cảm ứng vừa hiển thị vừa nhận thao tác chạm vuốt." },
+        { question: "Thiết bị nào sau đây KHÔNG PHẢI là bộ phận cơ bản của máy tính để bàn?", options: ["Máy in", "Thân máy", "Màn hình", "Bàn phím"], correct: 0, aiExplanation: "Máy in là thiết bị ngoại vi gắn thêm, không phải bộ phận cơ bản bắt buộc." },
+        { question: "Bộ phận nào trong thân máy tính thực hiện tính toán và xử lí thông tin?", options: ["Bộ xử lí (CPU)", "Ổ đĩa cứng", "Nguồn điện", "Quạt tản nhiệt"], correct: 0, aiExplanation: "Bộ xử lí là trung tâm tính toán và điều khiển toàn hệ thống." }
+      ],
+      "lop3_bai4": [
+        { question: "Khi làm việc với máy tính, khoảng cách an toàn từ mắt đến màn hình nên là bao nhiêu?", options: ["Khoảng 50 cm đến 80 cm", "Khoảng 10 cm đến 20 cm", "Càng gần càng tốt", "Trên 1 mét rưỡi"], correct: 0, aiExplanation: "Ngồi thẳng lưng, mắt cách màn hình 50 - 80 cm giúp bảo vệ thị lực." },
+        { question: "Để tắt máy tính để bàn đúng quy trình và an toàn cho dữ liệu, em thực hiện các bước nào?", options: ["Đóng các phần mềm đang mở, nháy chuột vào Start -> Power -> Shut down", "Rút phích cắm điện trực tiếp", "Nhấn giữ nút nguồn trên thân máy", "Tắt công tắc màn hình"], correct: 0, aiExplanation: "Tắt máy tính đúng quy tắc qua lệnh Shut down giúp hệ điều hành lưu dữ liệu an toàn." },
+        { question: "Hành động nào sau đây là VI PHẠM an toàn điện khi dùng máy tính?", options: ["Dùng tay ướt cắm phích điện hoặc tự ý dùng vật nhọn chọc vào khe cắm máy tính", "Hỏi người lớn khi bật tắt", "Báo người lớn khi dây hở", "Dùng khăn mềm vệ sinh"], correct: 0, aiExplanation: "Tuyệt đối không dùng tay ướt chạm thiết bị điện vì rất dễ bị điện giật." },
+        { question: "Khi đang sử dụng máy tính mà ngửi thấy mùi khét từ dây điện bốc lên, em cần làm gì?", options: ["Chạy ngay ra ngoài và báo ngay cho thầy cô giáo hoặc người lớn biết", "Ngồi im tiếp tục làm bài", "Lấy nước đổ vào", "Tự lấy kéo cắt dây"], correct: 0, aiExplanation: "Gặp sự cố chập cháy điện phải lập tức rời khỏi và báo người lớn." },
+        { question: "Tư thế ngồi sử dụng máy tính sai (gù lưng, cúi sát đầu) lâu ngày sẽ dẫn đến tác hại gì?", options: ["Gù lưng, vẹo cột sống và cận thị", "Tăng chiều cao", "Gõ phím nhanh hơn", "Không ảnh hưởng gì"], correct: 0, aiExplanation: "Ngồi sai tư thế làm ảnh hưởng nghiêm trọng đến cột sống và thị lực." },
+        { question: "Sau khoảng thời gian sử dụng máy tính liên tục, em nên nghỉ ngơi sau bao lâu?", options: ["Sau khoảng 30 phút sử dụng", "Sau 5 tiếng", "Chỉ nghỉ khi đau mắt", "Không cần nghỉ"], correct: 0, aiExplanation: "Nên dừng lại nghỉ ngơi, thư giãn mắt sau mỗi 30 phút." },
+        { question: "Hành động nào giúp giữ gìn vệ sinh và an toàn cho máy tính?", options: ["Không ăn uống quanh máy tính và dùng khăn mềm vệ sinh nhẹ nhàng", "Dùng khăn ướt sũng lau", "Vừa ăn bánh vừa gõ phím", "Gõ phím mạnh tay"], correct: 0, aiExplanation: "Tránh ăn uống gần thiết bị để phòng ngừa nước đổ làm chập cháy." },
+        { question: "Khi muốn bật máy tính để bàn, thao tác đúng là gì?", options: ["Kiểm tra nguồn điện, sau đó nhấn nút công tắc trên thân máy và màn hình", "Rút nguồn rồi cắm lại", "Nhấn phím bất kỳ", "Mở loa"], correct: 0, aiExplanation: "Đảm bảo nguồn điện rồi bật công tắc thân máy và màn hình để khởi động." }
+      ],
+      "lop3_bai5": [
+        { question: "Trên bàn phím máy tính, hai phím nào trên hàng cơ sở có gờ nhô lên để đặt hai ngón trỏ định vị?", options: ["Phím F và phím J", "Phím A và phím L", "Phím G và phím H", "Phím C và phím M"], correct: 0, aiExplanation: "Phím F và J có gờ nổi làm mốc xuất phát." },
+        { question: "Hàng phím cơ sở trên khu vực chính của bàn phím gồm có những phím chữ nào?", options: ["A, S, D, F, G, H, J, K, L, ;", "Q, W, E, R", "Z, X, C, V", "1, 2, 3, 4"], correct: 0, aiExplanation: "Hàng cơ sở chứa các phím A S D F G H J K L ;." },
+        { question: "Phím dài nhất trên bàn phím máy tính là phím gì và do ngón tay nào phụ trách?", options: ["Phím cách (Spacebar), do hai ngón tay cái phụ trách", "Phím Enter", "Phím Shift", "Phím Tab"], correct: 0, aiExplanation: "Phím Spacebar dài nhất do hai ngón cái phụ trách gõ khoảng trắng." },
+        { question: "Khu vực chính của bàn phím máy tính gồm có mấy hàng phím cơ bản?", options: ["5 hàng phím", "3 hàng phím", "2 hàng phím", "7 hàng phím"], correct: 0, aiExplanation: "Khu vực chính gồm hàng số, hàng trên, hàng cơ sở, hàng dưới và hàng phím cách." },
+        { question: "Khi đặt tay ở vị trí xuất phát, 4 ngón tay của bàn tay trái lần lượt đặt lên các phím nào?", options: ["F, D, S, A", "J, K, L, ;", "G, H, J, K", "Q, W, E, R"], correct: 0, aiExplanation: "Tay trái: trỏ F, giữa D, áp út S, út A." },
+        { question: "Khi đặt tay ở vị trí xuất phát, 4 ngón tay của bàn tay phải lần lượt đặt lên các phím nào?", options: ["J, K, L, ;", "F, D, S, A", "H, G, F, D", "U, I, O, P"], correct: 0, aiExplanation: "Tay phải: trỏ J, giữa K, áp út L, út ;." },
+        { question: "Quy tắc quan trọng sau khi ngón tay vươn lên gõ một phím ở hàng trên hoặc hàng dưới là gì?", options: ["Gõ xong phải đưa ngón tay trở về ngay vị trí xuất phát trên hàng phím cơ sở", "Giữ nguyên ngón tay", "Nhấc cả tay", "Chuyển sang chuột"], correct: 0, aiExplanation: "Luôn đưa ngón tay về hàng cơ sở sau khi gõ xong." },
+        { question: "Các phím chữ Q, W, E, R, T, Y, U, I, O, P thuộc hàng phím nào?", options: ["Hàng phím trên", "Hàng phím cơ sở", "Hàng phím dưới", "Hàng phím số"], correct: 0, aiExplanation: "Hàng nằm ngay phía trên hàng cơ sở là hàng phím trên." },
+        { question: "Các phím chữ Z, X, C, V, B, N, M thuộc hàng phím nào?", options: ["Hàng phím dưới", "Hàng phím trên", "Hàng phím cơ sở", "Hàng phím số"], correct: 0, aiExplanation: "Hàng nằm ngay phía dưới hàng cơ sở là hàng phím dưới." },
+        { question: "Phần mềm nào sau đây được giới thiệu trong SGK Tin học 3 để em luyện tập gõ 10 ngón đúng cách?", options: ["Kiran's Typing Tutor (hoặc Tux Typing)", "Paint", "PowerPoint", "Mê cung"], correct: 0, aiExplanation: "Kiran's Typing Tutor là phần mềm giúp luyện gõ phím 10 ngón." }
+      ],
+      "lop3_bai6_13": [
+        { question: "Chuột máy tính thông dụng thường gồm có các bộ phận cơ bản nào?", options: ["Nút trái, nút phải và nút cuộn", "Chỉ có nút trái và phải", "Nút nguồn", "Màn hình"], correct: 0, aiExplanation: "Chuột gồm nút trái, nút phải và nút cuộn ở giữa." },
+        { question: "Thao tác 'Nhấn nhanh hai lần liên tiếp nút trái chuột rồi thả tay ra' được gọi là gì?", options: ["Nháy đúp chuột", "Nháy đơn", "Nháy phải", "Kéo thả"], correct: 0, aiExplanation: "Nhấn nhanh 2 lần liên tiếp nút trái là nháy đúp chuột." },
+        { question: "Thao tác 'Nhấn giữ nút trái chuột, di chuyển con trỏ đến vị trí mới rồi thả tay ra' gọi là gì?", options: ["Kéo thả chuột", "Nháy chuột", "Nháy đúp", "Cuộn chuột"], correct: 0, aiExplanation: "Kéo thả chuột dùng để dịch chuyển biểu tượng đối tượng." },
+        { question: "Phần mềm nào giúp em rèn luyện 5 thao tác chuột cơ bản?", options: ["Basic Mouse Skills", "Unikey", "PowerPoint", "Wordpad"], correct: 0, aiExplanation: "Basic Mouse Skills chuyên luyện kỹ năng dùng chuột." }
+      ],
+      "lop3_bai7": [
+        { question: "Sắp xếp đồ vật hoặc dữ liệu hợp lí theo nhóm có điểm chung giúp ích gì?", options: ["Giúp quản lí ngăn nắp và tìm kiếm nhanh hơn khi cần", "Làm mất thời gian", "Làm hỏng đồ", "Không tác dụng"], correct: 0, aiExplanation: "Sắp xếp hợp lí theo phân loại giúp tìm kiếm đối tượng nhanh chóng." },
+        { question: "Sắp xếp là việc làm gì với đồ vật hoặc dữ liệu?", options: ["Phân loại đồ vật, dữ liệu vào các nhóm sao cho trong mỗi nhóm có một số điểm chung", "Vứt bỏ", "Xếp lộn xộn", "Đổi tên"], correct: 0, aiExplanation: "Sắp xếp là phân nhóm theo đặc điểm chung." },
+        { question: "Trong tủ quần áo gia đình, quần áo thường được sắp xếp như thế nào để dễ tìm?", options: ["Chia thành ngăn riêng: ngăn đựng quần, ngăn đựng áo", "Nhét lộn xộn", "Vứt trên giường", "Bỏ chung với giày"], correct: 0, aiExplanation: "Phân chia ngăn riêng biệt giúp tìm trang phục nhanh chóng." },
+        { question: "Khi cần tìm một đồ vật đã được sắp xếp theo nhóm, em nên tìm như thế nào để nhanh nhất?", options: ["Tìm trực tiếp trong nhóm tương ứng đã được phân loại", "Bới tung tất cả", "Đi mua mới", "Hỏi người khác"], correct: 0, aiExplanation: "Tìm theo quy tắc phân loại nhóm sẽ rút ngắn thời gian." }
+      ],
+      "lop3_bai8_9": [
+        { question: "Trong máy tính, các tệp và thư mục được tổ chức sắp xếp dưới dạng cấu trúc gì?", options: ["Cấu trúc hình cây (Sơ đồ cây)", "Cấu trúc hình tròn", "Cấu trúc thẳng", "Ngẫu nhiên"], correct: 0, aiExplanation: "Dữ liệu trên máy tính được lưu trữ dưới dạng sơ đồ hình cây." },
+        { question: "Trong cấu trúc cây thư mục, ổ đĩa (như C:, D:) còn được gọi là gì?", options: ["Thư mục gốc", "Thư mục con", "Tệp văn bản", "Thùng rác"], correct: 0, aiExplanation: "Ổ đĩa là gốc bắt đầu của cây thư mục." },
+        { question: "Mỗi thư mục trong máy tính có thể chứa những gì bên trong?", options: ["Các tệp tin và các thư mục con khác", "Chỉ chứa duy nhất một tệp", "Chỉ chứa ổ đĩa", "Không chứa gì"], correct: 0, aiExplanation: "Thư mục có thể chứa nhiều tệp và thư mục con." },
+        { question: "Để tạo một thư mục mới trong cửa sổ quản lí tệp trên Windows, em chọn lệnh nào?", options: ["New folder", "Delete", "Rename", "Copy"], correct: 0, aiExplanation: "Lệnh New folder dùng để khởi tạo thư mục mới." }
+      ],
+      "lop3_bai10": [
+        { question: "Thông tin nào sau đây của em và gia đình KHÔNG NÊN chia sẻ tùy tiện cho người lạ trên mạng?", options: ["Họ tên, địa chỉ nhà, số điện thoại của bố mẹ, mật khẩu tài khoản", "Bài hát thiếu nhi", "Tên con vật", "Màu sắc cặp sách"], correct: 0, aiExplanation: "Mật khẩu, địa chỉ và số điện thoại là dữ liệu cá nhân nhạy cảm." },
+        { question: "Khi kẻ xấu có được thông tin cá nhân hoặc gia đình em, chúng có thể làm gì?", options: ["Lừa đảo người thân, nói xấu hoặc đe dọa, bắt nạt em trên Internet", "Giúp đỡ kiếm tiền", "Giúp máy chạy nhanh", "Cài phần mềm"], correct: 0, aiExplanation: "Kẻ xấu lợi dụng thông tin riêng tư để lừa gạt hoặc đe dọa." },
+        { question: "Để người khác không thể tự ý mở và xem thông tin trên máy tính của mình, em nên làm gì?", options: ["Đặt mật khẩu (Password) bảo vệ cho máy tính", "Dán giấy che màn hình", "Rút dây chuột", "Không tắt máy"], correct: 0, aiExplanation: "Đặt mật khẩu bí mật giúp bảo vệ thông tin lưu trữ an toàn." }
+      ],
+      "lop3_bai11": [
+        { question: "Phần mềm nào sau đây được sử dụng để tạo ra các trang chiếu thuyết trình sinh động?", options: ["Microsoft PowerPoint", "Microsoft Word", "Kiran's Typing Tutor", "Basic Mouse Skills"], correct: 0, aiExplanation: "Microsoft PowerPoint là phần mềm tạo bài trình chiếu." },
+        { question: "Để bắt đầu trình chiếu toàn màn hình bài thuyết trình từ trang đầu tiên, em nhấn phím nào?", options: ["Phím F5", "Phím Enter", "Phím Shift", "Phím Caps Lock"], correct: 0, aiExplanation: "Nhấn phím F5 trên bàn phím để bắt đầu chiếu toàn màn hình." },
+        { question: "Để thoát khỏi chế độ trình chiếu quay về màn hình soạn thảo, em nhấn phím nào?", options: ["Phím Esc", "Phím Enter", "Phím F5", "Phím Spacebar"], correct: 0, aiExplanation: "Phím Esc dùng để thoát chế độ trình chiếu." }
+      ],
+      "lop3_bai12": [
+        { question: "Trong phần mềm khám phá thế giới tự nhiên Kids Games Learning Science, em có thể tìm hiểu nội dung gì?", options: ["Khám phá các hành tinh trong Hệ Mặt Trời và vòng đời của động vật", "Luyện gõ 10 ngón", "Tính lương", "Lập trình web"], correct: 0, aiExplanation: "Kids Games Learning Science giúp quan sát trực quan Hệ Mặt Trời và vòng đời sinh vật." }
+      ],
+      "lop3_bai14_16": [
+        { question: "Cách nói 'Nếu trời mưa thì em mặc áo mưa' thuộc dạng công việc gì?", options: ["Công việc được thực hiện theo điều kiện (Nếu... thì...)", "Công việc lặp vô tận", "Công việc bắt buộc", "Vô nghĩa"], correct: 0, aiExplanation: "Cấu trúc 'Nếu... thì...' thể hiện việc làm phụ thuộc điều kiện." }
+      ],
+
+      // --- TIN HỌC LỚP 4 ---
+      "lop4_bai1": [
+        { question: "Thiết bị nào sau đây là ví dụ về phần cứng máy tính?", options: ["Bàn phím, chuột, màn hình, thân máy", "Phần mềm PowerPoint", "Trò chơi Scratch", "Phần mềm Unikey"], correct: 0, aiExplanation: "Phần cứng là các bộ phận vật lí hữu hình của máy tính." }
+      ],
+      "lop4_bai2": [
+        { question: "Lợi ích của việc gõ bàn phím bằng 10 ngón đúng cách là gì?", options: ["Gõ nhanh, chính xác, tiết kiệm thời gian và bảo vệ sức khỏe (mắt, cột sống)", "Làm bàn phím kêu to", "Gõ chậm hơn", "Không lợi ích"], correct: 0, aiExplanation: "Gõ 10 ngón chuẩn giúp tăng tốc độ và bảo vệ sức khỏe." }
+      ],
+      "lop4_bai3": [
+        { question: "Khi con trỏ chuột di chuyển trên trang web chuyển thành hình bàn tay, vị trí đó chứa gì?", options: ["Siêu liên kết (Hyperlink)", "Văn bản lỗi", "Hình ảnh hỏng", "Quảng cáo độc hại"], correct: 0, aiExplanation: "Hình bàn tay cho biết vị trí chứa siêu liên kết." },
+        { question: "Các loại thông tin phổ biến xuất hiện trên một trang web bao gồm những gì?", options: ["Văn bản, hình ảnh, âm thanh, video và siêu liên kết", "Chỉ có chữ", "Chỉ có video", "Chỉ có âm thanh"], correct: 0, aiExplanation: "Trang web tích hợp siêu văn bản đa dạng các dạng thông tin." }
+      ],
+      "lop4_bai4": [
+        { question: "Từ khóa trong tìm kiếm thông tin trên Internet là gì?", options: ["Từ hoặc cụm từ ngắn gọn thể hiện nội dung chính em muốn tìm", "Đoạn văn dài", "Tên máy tính", "Mật khẩu web"], correct: 0, aiExplanation: "Từ khóa là cụm từ cốt lõi để máy tìm kiếm tra cứu thông tin." }
+      ],
+      "lop4_bai5": [
+        { question: "Trong máy tính, thư mục (Folder) thường có biểu tượng hình gì để dễ nhận biết?", options: ["Hình chiếc cặp/kẹp tài liệu màu vàng", "Hình nốt nhạc", "Hình quả táo", "Đồng hồ"], correct: 0, aiExplanation: "Thư mục có biểu tượng kẹp giấy màu vàng." }
+      ],
+      "lop4_bai6": [
+        { question: "Bản quyền phần mềm là gì?", options: ["Quyền của tác giả hoặc tổ chức tạo ra phần mềm, được pháp luật bảo vệ", "Quyền tự do sao chép và bán lại", "Ai tải trước người đó sở hữu", "Không cần cho phép"], correct: 0, aiExplanation: "Bản quyền phần mềm bảo vệ quyền lợi hợp pháp của tác giả." }
+      ],
+      "lop4_bai7_8": [
+        { question: "Để gõ được tiếng Việt trên máy tính, em cần có phần mềm hỗ trợ nào phổ biến?", options: ["Unikey", "PowerPoint", "Scratch", "Paint"], correct: 0, aiExplanation: "Unikey là phần mềm gõ tiếng Việt phổ biến nhất hiện nay." }
+      ],
+      "lop4_bai9": [
+        { question: "Hiệu ứng chuyển trang trong bài trình chiếu là gì?", options: ["Cách thức trang chiếu xuất hiện khi trình chiếu", "Cách thức chữ biến mất", "Hiệu ứng vẽ tranh", "Âm thanh nền"], correct: 0, aiExplanation: "Hiệu ứng chuyển trang quy định cách trang chiếu xuất hiện." }
+      ],
+      "lop4_bai10_11": [
+        { question: "Để xóa ký tự ở bên TRÁI con trỏ soạn thảo trong Word, em nhấn phím nào?", options: ["Phím Backspace", "Phím Delete", "Phím Enter", "Phím Shift"], correct: 0, aiExplanation: "Phím Backspace xóa ký tự bên trái con trỏ soạn thảo." }
+      ],
+      "lop4_bai12": [
+        { question: "Sản phẩm đa phương tiện là sản phẩm như thế nào?", options: ["Sản phẩm kết hợp nhiều dạng thông tin như văn bản, hình ảnh, âm thanh, video", "Chỉ có chữ viết", "Chỉ có tranh vẽ", "Không có âm thanh"], correct: 0, aiExplanation: "Đa phương tiện tích hợp nhiều dạng thông tin số." }
+      ],
+      "lop4_bai13_16": [
+        { question: "Trong phần mềm Scratch, mỗi câu lệnh điều khiển nhân vật được gọi là gì?", options: ["Một lệnh trong ngôn ngữ lập trình", "Đoạn văn bản Word", "Siêu liên kết", "Hình ảnh đồ họa"], correct: 0, aiExplanation: "Mỗi mảnh ghép lệnh điều khiển nhân vật là một câu lệnh lập trình trực quan." }
+      ],
+
+      // --- TIN HỌC LỚP 5 ---
+      "lop5_bai1": [
+        { question: "Máy tính và điện thoại thông minh có thể giúp học sinh làm được những việc gì?", options: ["Học tập, giải trí, tìm kiếm, trao đổi thông tin, hợp tác nhóm và tạo sản phẩm số", "Chỉ chơi game", "Chỉ xem phim", "Không giúp ích gì"], correct: 0, aiExplanation: "Máy tính hỗ trợ đa dạng học tập, giải trí và sáng tạo số." }
+      ],
+      "lop5_bai2_3": [
+        { question: "Để tìm kiếm thông tin trên một website, em có thể làm cách nào?", options: ["Duyệt theo các chủ đề hoặc dùng công cụ tìm kiếm (kính lúp) của website", "Đọc từ đầu đến cuối trang", "Tắt mở lại web", "Bấm F5 liên tục"], correct: 0, aiExplanation: "Website có menu chủ đề và kính lúp tìm kiếm nội bộ." }
+      ],
+      "lop5_bai4": [
+        { question: "Sắp xếp thư mục và tệp bằng cấu trúc cây hợp lí mang lại lợi ích gì?", options: ["Giúp quản lí, tìm kiếm dữ liệu dễ dàng và tiết kiệm thời gian", "Làm máy tính chậm", "Tốn dung lượng", "Không có lợi ích"], correct: 0, aiExplanation: "Cấu trúc cây thư mục khoa học giúp tìm kiếm tệp nhanh chóng." }
+      ],
+      "lop5_bai5": [
+        { question: "Bản quyền nội dung thông tin là gì?", options: ["Quyền của tác giả cho phép hoặc không cho phép người khác sử dụng nội dung thông tin của mình", "Quyền sao chép tùy ý", "Ai thấy trước có quyền đó", "Không có bản quyền"], correct: 0, aiExplanation: "Bản quyền là quyền sở hữu hợp pháp đối với tác phẩm trí tuệ." }
+      ],
+      "lop5_bai6_7": [
+        { question: "Trong Word, cách bố trí hình ảnh dạng Square có tác dụng gì?", options: ["Văn bản tự động dàn đều xung quanh khung hình ảnh", "Hình ảnh đè chữ", "Hình ảnh nằm dưới chữ", "Hình ảnh biến mất"], correct: 0, aiExplanation: "Kiểu Square giúp chữ bao quanh hình ảnh gọn gàng, đẹp mắt." }
+      ],
+      "lop5_bai8_9": [
+        { question: "Trong Paint, công cụ nào dùng để viết chữ lên thiệp chúc mừng?", options: ["Công cụ Text (biểu tượng chữ A)", "Bút vẽ", "Tẩy", "Thùng sơn"], correct: 0, aiExplanation: "Công cụ Text (chữ A) dùng để gõ văn bản." }
+      ],
+      "lop5_bai10_12": [
+        { question: "Trong Scratch, khối lệnh đặt trong lệnh 'lặp lại 10 lần' hoạt động như thế nào?", options: ["Được thực hiện lặp đi lặp lại đúng 10 lần rồi dừng", "Lặp mãi mãi", "Chỉ thực hiện 1 lần", "Không thực hiện"], correct: 0, aiExplanation: "Lặp với số lần biết trước sẽ lặp đúng số lần được chỉ định." }
+      ],
+      "lop5_bai13_16": [
+        { question: "Cấu trúc rẽ nhánh dạng đủ trong Scratch được mô tả theo câu nói nào?", options: ["Если <điều kiện đúng> thì <việc 1>, nếu không thì <việc 2>", "Chỉ có nếu đúng làm việc 1", "Lặp 10 lần", "Thực hiện tuần tự"], correct: 0, aiExplanation: "Cấu trúc rẽ nhánh dạng đủ kiểm tra điều kiện: đúng làm việc 1, sai làm việc 2." }
+      ]
+    };
+
+    var quizData = DATABASE["lop3_bai1"].map(xaoTronDapAn);
+    var currentQuestionIdx = 0;
+    var turn = 'RED';
+    var scoreRed = 0;
+    var scoreBlue = 0;
+    var tugPosition = 0;
+
+    function capNhatGiaoDien() {
+      if (currentQuestionIdx >= quizData.length) {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('game-over-box').classList.remove('hidden');
+        var wt = document.getElementById('winner-text');
+        if (scoreRed > scoreBlue) {
+          wt.innerText = "🏆 ĐỘI ĐỎ CHIẾN THẮNG!";
+          wt.className = "text-2xl font-black mb-2 text-red-600";
+        } else if (scoreBlue > scoreRed) {
+          wt.innerText = "🏆 ĐỘI XANH CHIẾN THẮNG!";
+          wt.className = "text-2xl font-black mb-2 text-blue-600";
+        } else {
+          wt.innerText = "🤝 KẾT QUẢ HÒA NHAU!";
+          wt.className = "text-2xl font-black mb-2 text-slate-700";
+        }
+        return;
+      }
+
+      var q = quizData[currentQuestionIdx];
+      document.getElementById('question-progress').innerText = "Câu hỏi " + (currentQuestionIdx + 1) + " / " + quizData.length;
+      document.getElementById('question-text').innerText = q.question;
+      document.getElementById('ai-feedback-box').classList.add('hidden');
+
+      var tb = document.getElementById('current-turn-badge');
+      tb.innerText = turn === 'RED' ? 'ĐỘI ĐỎ' : 'ĐỘI XANH';
+      tb.className = turn === 'RED' 
+        ? "ml-1 text-xs font-black text-red-600 bg-red-100 px-2.5 py-0.5 rounded-full" 
+        : "ml-1 text-xs font-black text-blue-600 bg-blue-100 px-2.5 py-0.5 rounded-full";
+
+      var labels = ['A', 'B', 'C', 'D'];
+      var grid = document.getElementById('answers-grid');
+      grid.innerHTML = '';
+      q.options.forEach(function(opt, idx) {
+        var btn = document.createElement('button');
+        btn.className = "flex items-center text-left p-4 rounded-xl border-2 border-slate-200 hover:border-indigo-500 bg-slate-50 font-semibold text-slate-700 transition duration-150";
+        btn.innerHTML = '<span class="w-8 h-8 rounded-lg bg-white border border-slate-300 flex items-center justify-center font-black mr-3 text-slate-800">' + labels[idx] + '</span> <span>' + opt + '</span>';
+        btn.onclick = function() { chonDapAn(idx); };
+        grid.appendChild(btn);
+      });
+    }
+
+    function chonDapAn(idx) {
+      var q = quizData[currentQuestionIdx];
+      var buttons = document.querySelectorAll('#answers-grid button');
+      buttons.forEach(function(b) { b.disabled = true; });
+
+      var dung = idx === q.correct;
+      if (dung) {
+        buttons[idx].classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+        if (turn === 'RED') {
+          scoreRed++;
+          tugPosition--;
+        } else {
+          scoreBlue++;
+          tugPosition++;
+        }
+      } else {
+        buttons[idx].classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+        if (buttons[q.correct]) {
+          buttons[q.correct].classList.add('bg-emerald-100', 'border-emerald-500');
+        }
+      }
+
+      document.getElementById('score-red').innerText = scoreRed;
+      document.getElementById('score-blue').innerText = scoreBlue;
+
+      tugPosition = Math.max(-5, Math.min(5, tugPosition));
+      var rP = 50 - (tugPosition * 8);
+      var bP = 50 + (tugPosition * 8);
+      document.getElementById('tug-bar-red').style.width = rP + "%";
+      document.getElementById('tug-bar-blue').style.width = bP + "%";
+      document.getElementById('tug-knot').style.left = rP + "%";
+
+      var fb = document.getElementById('ai-feedback-box');
+      fb.classList.remove('hidden');
+      if (dung) {
+        fb.className = "mt-6 p-4 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-900 block";
+        document.getElementById('ai-feedback-icon').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500"></i>';
+        document.getElementById('ai-feedback-title').innerText = "Chính xác! Lời giải sư phạm:";
+      } else {
+        fb.className = "mt-6 p-4 rounded-xl border border-amber-300 bg-amber-50 text-amber-900 block";
+        document.getElementById('ai-feedback-icon').innerHTML = '<i class="fa-solid fa-lightbulb text-amber-500"></i>';
+        document.getElementById('ai-feedback-title').innerText = "Chưa đúng rồi! Gợi ý ôn tập:";
+      }
+      document.getElementById('ai-feedback-content').innerText = q.aiExplanation || "Hãy ghi nhớ kiến thức trọng tâm này nhé!";
+    }
+
+    function cauTiepTheo() {
+      currentQuestionIdx++;
+      turn = (turn === 'RED') ? 'BLUE' : 'RED';
+      capNhatGiaoDien();
+    }
+
+    function choiLai() {
+      currentQuestionIdx = 0;
+      scoreRed = 0;
+      scoreBlue = 0;
+      tugPosition = 0;
+      turn = 'RED';
+      document.getElementById('score-red').innerText = "0";
+      document.getElementById('score-blue').innerText = "0";
+      document.getElementById('tug-bar-red').style.width = "50%";
+      document.getElementById('tug-bar-blue').style.width = "50%";
+      document.getElementById('tug-knot').style.left = "50%";
+      document.getElementById('game-over-box').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      capNhatGiaoDien();
+    }
+
+    // NẠP ĐỀ CHUẨN XÁC KHỚP ĐÚNG 100% THEO ĐÚNG MÃ BÀI ĐƯỢC CHỌN, KHÔNG GỘP CHUNG BÀI
+    function napDeTheoBaiHoc() {
+      var lessonKey = document.getElementById('select-lesson').value;
+      var customKw = document.getElementById('quiz-topic-custom').value.trim().toLowerCase();
+      var count = parseInt(document.getElementById('quiz-count').value, 10) || 10;
+      var status = document.getElementById('ai-status-msg');
+
+      status.innerHTML = '<span class="text-amber-600 font-bold"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang nạp câu hỏi...</span>';
+
+      setTimeout(function() {
+        var pool = DATABASE[lessonKey];
+
+        if (!pool) {
+          pool = DATABASE["lop3_bai1"];
+        }
+
+        if (customKw) {
+          for (var key in DATABASE) {
+            if (key.includes(customKw) || customKw.includes(key)) {
+              pool = DATABASE[key];
+              break;
+            }
+          }
+        }
+
+        var shuffledPool = pool.slice();
+        shuffledPool.sort(function() { return 0.5 - Math.random(); });
+        var selected = shuffledPool.slice(0, Math.min(count, shuffledPool.length));
+
+        quizData = selected.map(xaoTronDapAn);
+
+        choiLai();
+        status.innerHTML = '<span class="text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1"></i> Đã nạp thành công ' + quizData.length + ' câu hỏi chuẩn 100% bài học độc lập!</span>';
+      }, 150);
+    }
+
+    function napDeThuCong() {
+      var raw = document.getElementById('custom-quiz-text').value.trim();
+      if (!raw) {
+        alert("Vui lòng dán nội dung câu hỏi!");
+        return;
+      }
+
+      var lines = raw.split('\n');
+      var parsedList = [];
+      var currentItem = null;
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (!line) continue;
+
+        if (line.match(/^(câu|bài|\d+[\.:])/i)) {
+          if (currentItem && currentItem.options.length >= 2) {
+            parsedList.push(currentItem);
+          }
+          currentItem = { question: line.replace(/^(câu\s*\d+[\.:]?|\d+[\.:]?)/i, '').trim(), options: [], correct: 0, aiExplanation: "" };
+        } else if (line.match(/^[A-D][\.:]/i) && currentItem) {
+          currentItem.options.push(line.replace(/^[A-D][\.:]\s*/i, ''));
+        } else if (line.match(/^đáp án[\.:]/i) && currentItem) {
+          var char = line.replace(/^đáp án[\.:]\s*/i, '').toUpperCase().trim();
+          if (char === 'A') currentItem.correct = 0;
+          if (char === 'B') currentItem.correct = 1;
+          if (char === 'C') currentItem.correct = 2;
+          if (char === 'D') currentItem.correct = 3;
+        } else if (line.match(/^giải thích[\.:]/i) && currentItem) {
+          currentItem.aiExplanation = line.replace(/^giải thích[\.:]\s*/i, '');
+        }
+      }
+      if (currentItem && currentItem.options.length >= 2) {
+        parsedList.push(currentItem);
+      }
+
+      if (parsedList.length > 0) {
+        quizData = parsedList.map(xaoTronDapAn);
+        choiLai();
+        alert("Đã nạp thành công " + parsedList.length + " câu hỏi!");
+      } else {
+        alert("Chưa đọc được câu hỏi. Vui lòng kiểm tra lại cấu trúc: Câu 1: ... / A. ... / B. ... / Đáp án: A");
+      }
+    }
+
+    function switchTab(type) {
+      if (type === 'ai') {
+        document.getElementById('panel-ai').classList.remove('hidden');
+        document.getElementById('panel-custom').classList.add('hidden');
+        document.getElementById('tab-btn-ai').className = "text-xs font-bold py-1.5 px-4 rounded-lg bg-indigo-600 text-white shadow";
+        document.getElementById('tab-btn-custom').className = "text-xs font-bold py-1.5 px-4 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300";
+      } else {
+        document.getElementById('panel-ai').classList.add('hidden');
+        document.getElementById('panel-custom').classList.remove('hidden');
+        document.getElementById('tab-btn-custom').className = "text-xs font-bold py-1.5 px-4 rounded-lg bg-indigo-600 text-white shadow";
+        document.getElementById('tab-btn-ai').className = "text-xs font-bold py-1.5 px-4 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300";
+      }
+    }
+
+    function toggleConfig() {
+      document.getElementById('config-section').classList.toggle('hidden');
+    }
+
+    // Khởi chạy khi vừa mở file
+    napDeTheoBaiHoc();
+  </script>
+</body>
+</html>
